@@ -8,11 +8,11 @@ This is a team project for CSC328 that creates a chat system with a server and c
 To run the server, download the code and place it on your drive.
 Open a terminal at the directory and run the following command:
 
-    $>make server
+    make server
 
 Then enter the following command:
     
-    $>./server
+    ./server
 
 The script will run and you will enter a virtual environment, a 
 window will then open prompting you for host and port information.
@@ -24,11 +24,11 @@ second window will open.
 Start the server first (see above). Enter the following into a new 
 terminal window open to the program's directory:
 
-    $>make client
+    make client
 
 Then enter:
 
-    $>./client
+    ./client
 
 The script will run creating a virtual environment and 
 open a window prompt for port and host. Once the connection is 
@@ -42,6 +42,6 @@ will open a window and ask for the server information.
 
 To run this alternative enter the following into the command line
 
-    $>make run
-    $>Enter the number of clients: <n>
+    make run
+    Enter the number of clients: <n>
 
