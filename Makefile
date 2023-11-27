@@ -9,4 +9,8 @@ server: server
 .PHONY: run
 run: server client
 	./server
-	./client
+	@read -p "Enter the number of clients: " num; \
+	for i in $$(seq $$num); do \
+		./client; \
+	done
+
