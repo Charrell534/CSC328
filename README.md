@@ -34,14 +34,5 @@ The script will run creating a virtual environment and
 open a window prompt for port and host. Once the connection is 
 made with the information provided a chat window will open. 
 
-## Alternative to run both
 
-The Makefile contains a command to run both server and client scripts. This will 
-ask for the number of clients you would like to start at once. Realize each one 
-will open a window and ask for the server information.
-
-To run this alternative enter the following into the command line
-
-    make run
-    Enter the number of clients: <n>
 
