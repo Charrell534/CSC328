@@ -8,6 +8,13 @@ from chat import Scrollable
 
 class ServerMonitor:
     def __init__(self, handler: Callable, env: str, data: dict):
+        """
+        Initializes a tk window for server monitoring
+
+        :param handler: -Callable- main handler for closing
+        :param env: -str- .env file name
+        :param data: -dict- data being passed to run the server
+        """
         self.name = "name"
         self.window = tk.Tk()
         self.event = ChatEvent("Closing")

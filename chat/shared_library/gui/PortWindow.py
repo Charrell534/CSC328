@@ -68,7 +68,11 @@ class PortWindow:
         self._port_window.protocol("WM_DELETE_WINDOW", self._on_closing)
         self._port_window.mainloop()
 
-    def _data_entered(self):
+    def _data_entered(self) -> None:
+        """
+        Captures the data that was entered on submit, validates it using the
+        ValidInput class and places that data into our data object
+        """
         validate = ValidateInput(".env.port")
         if validate.validate_port(self.port_entry, self.error_label)\
                 and validate.validate_host(self.host_entry.get(), self.error_label):
@@ -76,16 +80,28 @@ class PortWindow:
             self.close()
 
     def _on_closing(self) -> None:
+        """
+        Captures a close event within the window, broadcasts that event to our
+        program and closes the window.
+        """
         self._closing_event.trigger()
         self._port_window.destroy()
 
     def is_open(self) -> bool:
+        """
+        Checks if our port window is open
+
+        :return: bool true if window is open
+        """
         if self._port_window.winfo_exists():
             return True
         else:
             return False
 
     def close(self) -> None:
+        """
+        Performs the necessary clean-up of our class
+        """
         self.dot_env.clear_env()
         self.dot_env = None
         self._closing_event.remove_handler(self.handler)
@@ -93,4 +109,9 @@ class PortWindow:
         self._port_window.destroy()
 
     def on_right_click(self, event) -> None:
+        """
+        Captures if the user does a right click to exit the window
+
+        :param event: right click event
+        """
         self._on_closing()

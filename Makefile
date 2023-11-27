@@ -1,9 +1,12 @@
 all: run
 
+client: client
+	chmod +x client
 
-server: server_test
-	chmod +x server_test
+server: server
+	chmod +x server
 
 .PHONY: run
-run: server
-	./server_test
+run: server client
+	./server
+	./client

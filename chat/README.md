@@ -18,6 +18,13 @@ getting their contents.
     env=DotEnvReader("<env_file>")
     data = env.read_env("<KEY>") 
 
+##### To remove env data from os.env
+    env=DotEnvReader("<env_file>")
+    env.clear_env()
+
+This is important especially if you have multiple variables with the same name
+(i.e. WINDOW_TITLE='Setup', WINDOW_TITLE='Chat')
+
 ## chat.shared_library.events.ChatEvent
 Custom Event class that is used within the chat to handle events such as
     closing, new message, etc.
