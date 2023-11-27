@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Set the name of virtual environment
+venv_name="env"
+
+# Create a virtual environment
+python3 -m venv $venv_name
+
+# Activate the virtual environment
+source $venv_name/bin/activate
+
+# Install required dependencies
+pip install --upgrade pip
+pip install multipledispatch
+pip install tk
+pip install python-dotenv
+
+# clean up a bit
+clear
+
+# Run python script (ONLY CHANGE THIS)
+python server.py
+
+# Deactivate the virtual environment when done
+deactivate
