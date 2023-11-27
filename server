@@ -1,10 +1,10 @@
 #!/bin/bash
 
-@echo "Initializing..."
+echo "Initializing..."
 # Set the name of virtual environment
 venv_name="env"
 
-@echo "Creating virtual environment..."
+echo "Creating virtual environment..."
 # Create a virtual environment
 if [ -d "$venv_name" ]; then
     echo "Virtual environment already exists."
@@ -12,11 +12,11 @@ else
     python3 -m venv $venv_name
 fi
 
-@echo "Activating virtual environment..."
+echo "Activating virtual environment..."
 # Activate the virtual environment
 source $venv_name/bin/activate
 
-@echo "Installing dependencies..."
+echo "Installing dependencies..."
 # Install required dependencies (add here as needed)
 dependencies=("multipledispatch" "tk" "python-dotenv")
 
@@ -35,7 +35,7 @@ done
 # clean up a bit
 clear
 
-@echo "Starting server..."
+echo "Starting server..."
 
 # Run python script
 python server.py

@@ -17,7 +17,7 @@ if __name__ == '__main__':
         port_window = PortWindow(do_shutdown)
         port_window.create_port_window()
         data = port_window.data
-        server_monitor = ServerMonitor(do_shutdown, ".env.server_script", data)
+        server_monitor = ServerMonitor(do_shutdown, ".env.server", data)
         server_monitor.start_server_monitor()
 
     except KeyboardInterrupt:

@@ -1,16 +1,16 @@
-all: run
+all: client server
 
-client: client
+client:
 	chmod +x client
 
-server: server
+server:
 	chmod +x server
 
-.PHONY: run
-run: server client
-	./server
+.PHONY: run server client
+run_client: client
 	@read -p "Enter the number of clients: " num; \
 	for i in $$(seq $$num); do \
 		./client; \
 	done
-
+run_server:
+	./server
