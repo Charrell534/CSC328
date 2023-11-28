@@ -56,6 +56,8 @@ class PortWindow:
         self.port_entry = tk.Entry()
         self.port_entry.pack(padx=5, pady=5)
 
+        self.port_entry.bind('<Return>', self.test_enter)
+
         self.error_label = tk.Label(fg="red")
         self.error_label.pack(padx=5, pady=5)
 
@@ -67,6 +69,9 @@ class PortWindow:
         self._port_window.bind("<Button-3>", self.on_right_click)
         self._port_window.protocol("WM_DELETE_WINDOW", self._on_closing)
         self._port_window.mainloop()
+
+    def test_enter(self, *args):
+        print("enter pressed")
 
     def _data_entered(self) -> None:
         """

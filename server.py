@@ -5,11 +5,7 @@ from server_script import ServerMonitor
 
 
 def do_shutdown():
-    count = 3
-    while count > 0:
-        print(f"shutting down in...{count}")
-        time.sleep(1)
-        count -= 1
+    exit()  # this should be final however may need to adjust for PortWindow
 
 
 if __name__ == '__main__':
@@ -25,3 +21,8 @@ if __name__ == '__main__':
     except PortRangeException as e:
         print(e.message)
         do_shutdown()
+
+
+
+# TODO revise word doc to include turn taking
+# TODO add gnome-terminal to make doc for auto loading clients
