@@ -1,9 +1,7 @@
-all: client server
+all: server client
 
-client:
-	chmod +x client
+server: server.py
+	chmod +x server.py
 
-server:
-	chmod +x server
-
-.PHONY: server client
+client: client.py
+	chmod +x client.py

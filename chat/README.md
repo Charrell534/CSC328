@@ -1,107 +1,46 @@
-# Chat Library
+# Classes within this package 
 
-The following folders and files contained within this 
-directory are shared Libraries for both the client chat app and server
-that handles the chat. The libraries include the following:
+## chat.connection.Conn
 
-## chat.shared_library.dotenv.DotEnvReader
-Contains the class DotEnvReader which is responsible for reading .env files and 
-getting their contents. 
+Provides an interface to make socket connections, send and receive 
+messages, and accept client connections. 
 
-#### Usage:
-##### Import 
+See [Conn README.md](connection/README.md) for usage.
 
-    from chat import DotEnvReader
+## chat.dotenv.DotEnvReader
 
-##### To read from .env
-    
-    env=DotEnvReader("<env_file>")
-    data = env.read_env("<KEY>") 
+Provides an easy-to-use interface for reading and accessing 
+environmental variables from an env file. 
 
-##### To remove env data from os.env
-    env=DotEnvReader("<env_file>")
-    env.clear_env()
+See [DotEnvReader README.md](dotenv/README.md) for usage
 
-This is important especially if you have multiple variables with the same name
-(i.e. WINDOW_TITLE='Setup', WINDOW_TITLE='Chat')
+## chat.exceptions.Exceptions
 
-## chat.shared_library.events.ChatEvent
-Custom Event class that is used within the chat to handle events such as
-    closing, new message, etc.
+Contains custom exception handlers for this project. 
 
-#### Usage:
-##### Import
-    from chat import ChatEvent
+See [Exceptions README.md](exceptions/README.md) for usage.
 
-##### Adding a new event
-    self._closing_event = ChatEvent("Closing")
-    self._closing_event.add_handler(handler)
+## chat.gui.PortWindow
 
-Where 'handler' is a Callable to handle the event.
-##### Removing a handler
-    self._closing_event.remove_handler(handler)
-##### Triggering an event
-    self._closing_event.trigger(*argv, **kwargs)
+Provides a gui interface for the user to input their desired host and port numbers.
 
-## chat.shared_library.exceptions.HostNotFoundException
-Exception class to handle host errors such as not correct formatting,
-    host unreachable, etc.
+See [PortWindow README_PW.md](gui/README_PW.md) for usage.
 
-#### Usage:
-##### Import
-    from chat import HostNotFoundException
+## chat.gui.ServerWindow
 
-##### Raising the exception
-    raise HostNotFoundException("<message>")
+Provides a gui interface for the user to view activity in a
+server implementation of this project. 
 
-## chat.shared_library.exceptions.PortRangeException
+See [ServerWindow README_SW.md](gui/README_SW.md) for usage.
 
-PortRangeException is raised when a user entered port number
-    is out of the specified range
+## chat.gui.ClientWindow
 
-#### Usage:
-##### Import
-    from chat import PortRangeException
+Provides a gui interface for the user to view and chat with other clients.
 
-##### Raise the exception
-    raise PortRangeException("<message>")
+See [ClientWindow README_CW.md](gui/README_CW.md) for usage.
 
-## chat.shared_library.gui.PortWindow
-This class is used to display a prompt window for port and host
-    variables from the user in a GUI.
+## chat.validation.Validation
 
-#### Usage
-##### Import 
-    from chat import PortWindow
+Provides a class (ValidateUserInput) that cleans input from users.
 
-##### Initialize
-    window = PortWindow(<event_handling_function_for_close>)
-    window.create_port_window()
-
-##### To get port and host info (after close)
-    window.create_port_window()
-    data = window.data
-    print(data['port'])
-    print(data['host'])
-
-## chat.shared_library.validate.ValidateInput
-This class handles user input validation. Currently, handles port number, host name, message.
-
-#### Usage
-##### Import
-    from chat import ValidateInput
-##### Validate Port number
-    validate = ValidateInput("<port_env>")
-    if validate.validate_port(<user_input>):
-        port = validate.data['port']
-
-##### Validate Host input
-    validate = ValidateInput("<port_env>")
-    if validate.validate_host(<user_input>):
-        host = validate.data['host']
-
-##### Clean Message input
-    validate = ValidateInput("<message_env>")
-    clean_input = validate.clean_message(<user_input>)
-
-
+See [Validation README.md](validation/README.md) for usage.

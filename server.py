@@ -1,28 +1,21 @@
-import time
+#!/usr/bin/env python3
+import tkinter as tk
 
-from chat import PortRangeException, PortWindow
-from server_script import ServerMonitor
+from chat.gui.PortWindow import PortWindow
+from chat.gui.ServerWindow import ServerWindow
 
-
-def do_shutdown():
-    exit()  # this should be final however may need to adjust for PortWindow
-
-
-if __name__ == '__main__':
+if __name__ == "__main__":
+    server = None
     try:
-        port_window = PortWindow(do_shutdown)
-        port_window.create_port_window()
-        data = port_window.data
-        server_monitor = ServerMonitor(do_shutdown, ".env.server", data)
-        server_monitor.start_server_monitor()
+
+        window = PortWindow()
+        window.create_window()
+        window.run()
+        data = window.data
+        root = tk.Tk()
+        server = ServerWindow(root, data)
+        server.run()
 
     except KeyboardInterrupt:
-        do_shutdown()
-    except PortRangeException as e:
-        print(e.message)
-        do_shutdown()
-
-
-
-# TODO revise word doc to include turn taking
-# TODO add gnome-terminal to make doc for auto loading clients
+        if server:
+            server.shutdown()

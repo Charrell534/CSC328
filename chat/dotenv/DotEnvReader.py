@@ -1,10 +1,3 @@
-#
-# Craig R Harrell
-# CSC328 - Final Project
-# File: DotEnvReader.py
-# This class is used to read .env files
-#
-
 import os
 
 from dotenv import load_dotenv, dotenv_values
@@ -12,8 +5,9 @@ from dotenv import load_dotenv, dotenv_values
 
 class DotEnvReader:
     """
-    This class reads in a .env file and adds it to the os environment
-    """
+        This class reads in a .env file and adds it to the os environment
+        """
+
     def __init__(self, env: str):
         """
         Reads in the .env file
@@ -33,9 +27,9 @@ class DotEnvReader:
         :param exc_tb:
         :return:
         """
-        self.clear_env()
+        self.clear()
 
-    def read_env(self, key: str) -> str:
+    def read(self, key: str) -> str:
         """
         Finds the key in the environment and reads the value
 
@@ -47,7 +41,7 @@ class DotEnvReader:
         else:
             return "Key Not Found"
 
-    def clear_env(self) -> None:
+    def clear(self) -> None:
         """
         Clears the environment of the variables passed to it from the
         .env file
@@ -56,7 +50,5 @@ class DotEnvReader:
         for key in temp:
             if key in os.environ:
                 os.environ.pop(key)
-
-
 
 

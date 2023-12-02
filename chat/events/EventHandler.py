@@ -1,19 +1,11 @@
-#
-# Craig R Harrell
-# CSC328 - Final Project
-# File: ChatEvent.py
-# This class is used as a generic event class to trigger events across
-# classes.
-#
-
 from typing import Callable
 
 
-class ChatEvent:
+class EventHandler:
     """
-    Custom Event class that is used within the chat to handle events such as
-    closing, new message, etc.
-    """
+        Custom Event class that is used within the chat to handle events such as
+        closing, new message, etc.
+        """
 
     def __init__(self, name: str) -> None:
         """
@@ -50,3 +42,4 @@ class ChatEvent:
         """
         for handler in self.handlers:
             handler(*args, **kwargs)
+
