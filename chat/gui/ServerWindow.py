@@ -267,36 +267,3 @@ class ServerWindow:
             self.user_list.see(tk.END)
 
 
-"""
-Consider Logging:
-
-    Instead of printing messages for debugging purposes, consider using the logging module. It provides a more flexible and configurable way to handle log messages.
-
-Improve Exception Handling:
-
-    Consider catching more specific exceptions where applicable, instead of catching a broad Exception or ConnectionResetError.
-
-Docstrings:
-
-    Add detailed docstrings for methods, describing their purpose, parameters, and return values.
-
-Separation of Concerns:
-
-    Consider breaking down the large methods into smaller, more focused methods. This improves code readability and makes it easier to understand and maintain.
-
-Logging in ServerWindow Initialization:
-
-    Consider adding log statements to indicate when the server window is initialized and when the server starts listening.
-
-Close Connections on Server Shutdown:
-
-    Ensure that all client connections are properly closed during server shutdown.
-
-Error Handling in Socket Operations:
-
-    Add appropriate error handling for socket operations, such as handling socket.error or specific socket-related exceptions.
-
-Configurability:
-
-    Consider making some parameters, such as window title and size, configurable (e.g., by passing them as arguments or reading from a configuration file).
-"""
