@@ -9,7 +9,7 @@ class Connection:
 
     def start_server(self):
         self.socket.bind((self.host, self.port))
-        self.socket.listen(1)
+        self.socket.listen()
 
     def start_client(self):
         self.socket.connect((self.host, self.port))
