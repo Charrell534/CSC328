@@ -1,7 +1,7 @@
 all: server client
 
-server: server.py
-	chmod +x server.py
+server:
+	chmod +x start.sh
 
-client: client.py
+client:
 	chmod +x client.py
