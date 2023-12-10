@@ -1,0 +1,38 @@
+{"message": "Idle"}
+{"message": "Starting..."}
+{"message": "Listening on localhost:8888"}
+"{\"type\": \"message\", \"message\": \"welcome\", \"username\": \"server\", \"timestamp\": \"12-10-2023 14:12:21\"}"
+{"action": "E", "address/port": "127.0.0.1:56738", "username": "kick", "timestamp": "12-10-2023 14:12:24"}
+{"type": "username", "username": "good", "timestamp": "12-10-2023 14:12:24"}
+"{\"type\": \"message\", \"message\": \"welcome\", \"username\": \"server\", \"timestamp\": \"12-10-2023 14:12:32\"}"
+{"action": "E", "address/port": "127.0.0.1:56743", "username": "tom", "timestamp": "12-10-2023 14:12:39"}
+{"type": "username", "username": "good", "timestamp": "12-10-2023 14:12:39"}
+{"type": "message", "message": "hello", "timestamp": "12-10-2023 14:12:47", "username": "tom"}
+{"type": "message", "message": "hey there", "timestamp": "12-10-2023 14:12:54", "username": "kick"}
+{"type": "exit", "message": "Server shutting down in...5 seconds.", "timestamp": "12-10-2023 14:13:01"}
+{"type": "exit", "message": "Server shutting down in...4 seconds.", "timestamp": "12-10-2023 14:13:02"}
+{"type": "exit", "message": "Server shutting down in...3 seconds.", "timestamp": "12-10-2023 14:13:03"}
+{"type": "exit", "message": "Server shutting down in...2 seconds.", "timestamp": "12-10-2023 14:13:04"}
+{"type": "exit", "message": "Server shutting down in...1 seconds.", "timestamp": "12-10-2023 14:13:05"}
+{"message": "Idle"}
+{"type": "exit", "message": "Server shutting down in...5 seconds.", "timestamp": "12-10-2023 14:15:34"}
+{"type": "exit", "message": "Server shutting down in...4 seconds.", "timestamp": "12-10-2023 14:15:35"}
+{"type": "exit", "message": "Server shutting down in...3 seconds.", "timestamp": "12-10-2023 14:15:36"}
+{"type": "exit", "message": "Server shutting down in...2 seconds.", "timestamp": "12-10-2023 14:15:37"}
+{"type": "exit", "message": "Server shutting down in...1 seconds.", "timestamp": "12-10-2023 14:15:38"}
+{"message": "Idle"}
+{"type": "exit", "message": "Server shutting down in...5 seconds.", "timestamp": "12-10-2023 14:21:35"}
+{"type": "exit", "message": "Server shutting down in...4 seconds.", "timestamp": "12-10-2023 14:21:36"}
+{"type": "exit", "message": "Server shutting down in...3 seconds.", "timestamp": "12-10-2023 14:21:37"}
+{"type": "exit", "message": "Server shutting down in...2 seconds.", "timestamp": "12-10-2023 14:21:38"}
+{"type": "exit", "message": "Server shutting down in...1 seconds.", "timestamp": "12-10-2023 14:21:39"}
+{"message": "Idle"}
+{"message": "Starting..."}
+{"message": "Idle"}
+{"message": "Starting..."}
+{"message": "Listening on localhost:1025"}
+{"type": "exit", "message": "Server shutting down in...5 seconds.", "timestamp": "12-10-2023 14:26:07"}
+{"type": "exit", "message": "Server shutting down in...4 seconds.", "timestamp": "12-10-2023 14:26:08"}
+{"type": "exit", "message": "Server shutting down in...3 seconds.", "timestamp": "12-10-2023 14:26:09"}
+{"type": "exit", "message": "Server shutting down in...2 seconds.", "timestamp": "12-10-2023 14:26:10"}
+{"type": "exit", "message": "Server shutting down in...1 seconds.", "timestamp": "12-10-2023 14:26:11"}
