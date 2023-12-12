@@ -52,7 +52,7 @@ can enter either "localhost" or any IPv4 or IPv6 host address.
                  within this package.
 
 
-### Root > chat > connections 
+### chat.connections 
 
     SocketConnection.py - Provides the shared library object for both the 
                             server and client chat apps.
