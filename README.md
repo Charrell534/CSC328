@@ -1,4 +1,16 @@
-ID block
+# CSC 328 Final Network Program Implementation
+## Authors
+Emily Deneen, Craig R Harrell
+
+December 12, 2023
+
+## Class
+CSC 328
+
+## About
+This project implements a chat server and client using sockets, allowing multiple users to be clients and communicate
+with each other. 
+
 
 ## How to build and run the client and server
 
@@ -35,11 +47,24 @@ can enter either "localhost" or any IPv4 or IPv6 host address.
     monitor.py - Provides a GUI for server
     server.py  - Provides the methods to run a chat server
     start.sh   - Main entry point for running both the server and GUI monitor
+    Makefile   - Provides the necessary functions to run the applications.
+    README.md  - Provides descriptions and information needed to successfully run the programs contained 
+                 within this package.
+
 
 ### Root > chat > connections 
 
     SocketConnection.py - Provides the shared library object for both the 
-                            server and client chat apps. 
+                            server and client chat apps.
+    ServerImp.py        - Provides the implementation of the server.
+    
+### chat.dotenv
+
+    DotaEnvReader.py - Provides an quick and dirty .env reader.
+
+
+### Root.chat.gui
+    LogViewer.py - Provides a GUI for user interaction with the chat server
 
 ## Responsibility matrix 
 
@@ -49,4 +74,41 @@ can enter either "localhost" or any IPv4 or IPv6 host address.
 | client | Emily    |   
  | Documentation| Both |
 | Library| Craig | 
+
+## Tasks
+
+## Protocol
+
+Please see [ClientServer-NetworkProgramDesign](CleintServer-NetworkProgramDisign.docx)
+
+## Assumptions
+
+### Server
+It is assumed that the user will use the bash file (start.sh) to enter into the server program on a local machine with 
+all required dependencies. (json, dotenv, tkinter)
+The user should enter a host name and port number they wish the server to work on as arguments for the bash file. 
+The bash runs and checks the arguments and then the server is started and enters idle mode. 
+After which the bash grabs the PID of the server app and starts the server monitor app passing it the PID. 
+The server monitor app then is able to communicate with the server app using signals to start and close the server.
+The server monitor app also reads the server logs displaying the last action that was performed on the server.
+
+Once the server monitor is closed, the server should close as well if it was not closed prior to now, the bash script
+finishes. 
+
+## Discussions
+
+Python's threading library is terrible about closing. This issued arose when trying to close the tkinter window, the 
+script would hang. This was solved by separating the logic of the tkinter window and threading, adding additional exception 
+handling, and lots and lots of head scratching, tears, yelling(cursing), and finally just giving up for a simpler setup.
+
+## Status
+
+The server has been completed to the specifications given, and works as required. There are no known bugs, however,
+I was not able to test it for every scenario and condition it may encounter in the wild.
+
+
+
+
+
+
 
