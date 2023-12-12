@@ -1,3 +1,8 @@
+# Craig R Harrell
+# CSC 328 Final Project
+# 12/10/2023
+# Provides the class to implement the socket chat server
+
 import json
 import signal
 import threading
