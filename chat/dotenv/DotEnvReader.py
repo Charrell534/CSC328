@@ -1,8 +1,8 @@
-#
-#
-#
-#
-#
+# Craig R Harrell
+# CSC 328 Final Project
+# 12/10/2023
+# Provides the class to read from an .env file easily
+
 import os
 import dotenv
 
