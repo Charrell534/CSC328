@@ -50,6 +50,7 @@ can enter either "localhost" or any IPv4 or IPv6 host address.
     Makefile   - Provides the necessary functions to run the applications.
     README.md  - Provides descriptions and information needed to successfully run the programs contained 
                  within this package.
+    chat       - [Directory] Python package library- see below for details.
 
 
 ### chat.connections 
@@ -63,7 +64,7 @@ can enter either "localhost" or any IPv4 or IPv6 host address.
     DotaEnvReader.py - Provides an quick and dirty .env reader.
 
 
-### Root.chat.gui
+### chat.gui
     LogViewer.py - Provides a GUI for user interaction with the chat server
 
 ## Responsibility matrix 
@@ -76,6 +77,18 @@ can enter either "localhost" or any IPv4 or IPv6 host address.
 | Library| Craig | 
 
 ## Tasks
+
+Major tasks are shown below with time to complete and
+contributor. 
+
+| Task          | Time    | Contribution |
+|:--------------|---------|:------------:|
+| Server alone  | 8 hrs   |    Craig     |
+| Server GUI    | 6 days  |    Craig     |
+| Documentation | 1 month |    Craig     |
+| Client        |         |              |
+| Client GUI    |         |              |
+|Documentation |         |              |
 
 ## Protocol
 
