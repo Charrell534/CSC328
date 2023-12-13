@@ -39,7 +39,8 @@ can enter either "localhost" or any IPv4 or IPv6 host address.
 ### Run Client
 
 After running make, you can use the following command:
-    ./client <host_name> <port_number>
+
+     ./client <host_name> <port_number>
 
 
 
