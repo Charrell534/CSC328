@@ -39,7 +39,7 @@ can enter either "localhost" or any IPv4 or IPv6 host address.
 ### Run Client
 
 After running make, you can use the following command:
-./client <host_name> <port_number>
+    ./client <host_name> <port_number>
 
 
 
@@ -114,7 +114,7 @@ Once the server monitor is closed, the server should close as well if it was not
 finishes. 
 
 ### Client
-The user will not be sending very long messages (see Discussions)
+It is assumed the user will not be sending very long messages and can cope with sending multiple shorter ones. (see Discussions)
 
 
 ## Discussions
