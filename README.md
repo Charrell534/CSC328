@@ -36,7 +36,10 @@ Please allow a moment or two for the GUI to initialize.
 Port numbers must be between 1025-65536 on a personal computer. You 
 can enter either "localhost" or any IPv4 or IPv6 host address. 
 
+### Run Client
 
+After running make, you can use the following command:
+./client <host_name> <port_number>
 
 
 
@@ -50,6 +53,8 @@ can enter either "localhost" or any IPv4 or IPv6 host address.
     Makefile   - Provides the necessary functions to run the applications.
     README.md  - Provides descriptions and information needed to successfully run the programs contained 
                  within this package.
+    client.py - provides the methons needed to run client application. Runs client in terminal.
+
     chat       - [Directory] Python package library- see below for details.
 
 
@@ -86,9 +91,9 @@ contributor.
 | Server alone  | 8 hrs   |    Craig     |
 | Server GUI    | 6 days  |    Craig     |
 | Documentation | 1 month |    Craig     |
-| Client        |         |              |
-| Client GUI    |         |              |
-|Documentation |         |              |
+| Client        | 2.5 hrs |    Emily     |
+| Client GUI    | 4.5 hrs |    Emily     |
+| Documentation | 1 hr    |    Emily     |
 
 ## Protocol
 
@@ -108,11 +113,17 @@ The server monitor app also reads the server logs displaying the last action tha
 Once the server monitor is closed, the server should close as well if it was not closed prior to now, the bash script
 finishes. 
 
+### Client
+The user will not be sending very long messages (see Discussions)
+
+
 ## Discussions
 
 Python's threading library is terrible about closing. This issued arose when trying to close the tkinter window, the 
 script would hang. This was solved by separating the logic of the tkinter window and threading, adding additional exception 
 handling, and lots and lots of head scratching, tears, yelling(cursing), and finally just giving up for a simpler setup.
+
+Because of how the curses library works, the user can only send a message as long as their terminal window. While this is not ideal, this would prevent users from trolling by flooding the entire screen with a very large message, so it has its upsides. There is no reasonable way to fix this, and I am not going through the curses library's code.
 
 ## Status
 
