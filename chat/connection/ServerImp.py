@@ -18,32 +18,52 @@ class Server(Connection):
     """
     Provides the methods to run a server implementation using sockets.
     """
-    def __init__(self, host_s, port_s):
+    def __init__(self, host_s=None, port_s=None):
         """
         Initializes the components we will need for our server to function.
 
         :param host_s: str Host name
         :param port_s: int host port number
         """
+        self.env = Env()
+
+        # if this class is used outside this program supply defaults.
+        if host_s is None:
+            host_s = self.env.read("HOST_DEFAULT")
+        if port_s is None:
+            port_s = int(self.env.read("PORT_DEFAULT"))
+
+        # init parent
         super().__init__(host=host_s, port=port_s)
+
+        # set up and empty string to hold our custom log name
         self.server_log = None
+
+        # define our client dict
         self.clients = {}
         self.reserved_usernames = ['admin', 'mod', 'super', 'owner']
-        self.env = Env()
+
+        # set up our threading features
         self.thread_lock = threading.Lock()
         self.is_running = False
         self.user_thread = None
+
+        # set up signal listeners
         signal.signal(signal.SIGINT, self._stop)
         signal.signal(signal.SIGTERM, self._stop)
         signal.signal(signal.SIGUSR1, self._start)
+
+        # put us in an idle state
         self.idle()
 
     def idle(self):
         """
-        Performs setup actions and puts the app in idle mode. It is here so
+        Performs setup actions and puts the app in idle mode. It is here, so
         we can get the PID and start the monitor which will have a button to actually
         start the server.
         """
+        # set us up to run but don't actually do anything, just hand out till we get
+        # the signal.
         self.write_file_with_current_day()
         self.write_to_log({'message': 'Idle'})
         while not self.is_running:
@@ -54,11 +74,15 @@ class Server(Connection):
         Starts the server and accepts clients and puts them in their own thread
 
         """
+        # set up our monitoring
         self.write_to_log({"message": f"{self.env.read('MSG_STARTING')}"})
         self.is_running = True
 
+        # call the parent to start the server
         super().start_server()
         self.write_to_log({"message": f"Listening on {self.host}:{self.port}"})
+
+        # grab ahold of any incoming connections and thread them
         try:
             while self.is_running:
                 client_socket, address = self.socket.accept()
@@ -66,18 +90,23 @@ class Server(Connection):
                 self.user_thread.start()
         except ConnectionAbortedError:
             # close gracefully if possible Shouldn't get this error at all with current setup.
+            # here as an artifact incase need to revert.
             self.close()
 
     def write_file_with_current_day(self):
         """
         Creates a log file with today's date as part of the file name
         """
+        # get current day YYYY-mm-dd and append it to the front of our log
+        # file to make it unique
         current_day = datetime.now().strftime('%Y-%m-%d')
         self.server_log = f'logs/{current_day}_server.log'
 
+        # if our log exists stop what we are doing and get out of here
         if os.path.isfile(self.server_log):
             return
 
+        # if it doesn't exist create it
         with open(self.server_log, 'w') as file:
             file.write("")
         file.close()
@@ -107,9 +136,11 @@ class Server(Connection):
                 # listen for messages from client and act accordingly
                 message = self.receive_message(c_socket)
 
+                # if we don't get a message just return to the beginning until we do
                 if not message:
                     continue
 
+                # we got a message load it into a dict to read it
                 message = json.loads(message)
 
                 if message["type"] == "message":
@@ -135,8 +166,11 @@ class Server(Connection):
         :param message: dict of message
         :param c_socket: client socket
         """
+        # add the username and timestamp to the message
         message['timestamp'] = f"{self.get_time()}"
         message['username'] = f"{self.clients[c_socket]}"
+
+        # log it and send
         self.write_to_log(message)
         self.broadcast_message(message, c_socket)
 
@@ -151,7 +185,9 @@ class Server(Connection):
                "timestamp": f"{self.get_time()}"}
         # exiting message in logs
         self.store_username(c_socket, self.clients[c_socket], 'X')
+        # send the exit message to log
         self.write_to_log(msg)
+        # send message to everyone except the loser who is leaving our cool chat.
         self.broadcast_message(msg, c_socket)
 
     def broadcast_message(self, message, originator=None):
@@ -162,11 +198,15 @@ class Server(Connection):
         :param message: dict of message to send
         :param originator: socket client socket if provided (optional)
         """
+        # lock the thread, so we don't accidentally move on before we finish what we are doing
         with self.thread_lock:
+            # send a message to each user
             for client_socket, _ in self.clients.items():
-                if client_socket != originator:
+                if client_socket != originator: # except the one who sent the message
                     try:
+                        # load it into a json object string
                         message_json = json.dumps(message)
+                        # now send
                         self.send_message(message_json, client_socket)
                     except Exception as e:
                         print(f"Error broadcasting message: {e}")
@@ -179,12 +219,14 @@ class Server(Connection):
         :param username: str client's username
         :param action: char what action is being performed 'E' for entering 'X' for exit
         """
+        # get user info and store it in a dict to write to a log then add the user to our list
         address = c_socket.getpeername()
         msg = {"action": f"{action}", "address/port": f"{address[0]}:{address[1]}",
                "username": f"{username}", "timestamp": f"{self.get_time()}"}
         self.write_to_log(msg)
-        with self.thread_lock:
-            self.clients[c_socket] = username
+        if action != "X":  # user is logging out
+            with self.thread_lock:
+                self.clients[c_socket] = username
 
     def request_username(self, c_socket):
         """
@@ -193,10 +235,11 @@ class Server(Connection):
 
         :param c_socket: socket client socket
         """
+        # welcome the user but don't let them do anything till we get a valid username
         msg = json.dumps({"type": "message", "message": f"{self.env.read('MSG_WELCOME')}", "username": "server",
                           "timestamp": f"{self.get_time()}"})
         self.send_message(msg, c_socket)
-        self.write_to_log(msg)
+        self.write_to_log(msg)  # log the welcome
         while True:
             try:
                 user_response = json.loads(self.receive_message(c_socket))
@@ -238,12 +281,14 @@ class Server(Connection):
         """
         count = 5
         while count > 0:
+            # send to every user connected that the server is shutting down in 5, 4, 3, 2, 1
             msg = {"type": "exit", "message": f"Server shutting down in...{count} seconds.",
                    "timestamp": f"{self.get_time()}"}
             self.broadcast_message(msg)
             self.write_to_log(msg)
             time.sleep(1)
             count -= 1
+
         self.is_running = False
         # Close all client connections
         with self.thread_lock:
@@ -284,6 +329,7 @@ class Server(Connection):
         :param c_socket: socket client socket
         """
         addr = c_socket.getpeername()
+        # format our data how we want it stored.
         msg = f"{addr[0]}:{addr[1]}, {message['username']}," \
               f"{message['timestamp']}, {message['message']}\n"
         self.write_to_log(msg)

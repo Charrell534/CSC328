@@ -11,6 +11,8 @@ CSC 328
 This project implements a chat server and client using sockets, allowing multiple users to be clients and communicate
 with each other. 
 
+Original repository can be found at 
+
 
 ## How to build and run the client and server
 
@@ -43,21 +45,19 @@ After running make, you can use the following command:
      ./client <host_name> <port_number>
 
 
-
 ## File/folder manifest 
 
 ### Root Folder contents:
 
     monitor.py - Provides a GUI for server
+    client.py  - provides the methons needed to run client application. Runs client in terminal.
     server.py  - Provides the methods to run a chat server
     start.sh   - Main entry point for running both the server and GUI monitor
     Makefile   - Provides the necessary functions to run the applications.
     README.md  - Provides descriptions and information needed to successfully run the programs contained 
                  within this package.
-    client.py - provides the methons needed to run client application. Runs client in terminal.
-
     chat       - [Directory] Python package library- see below for details.
-
+    environment- [Directory] Holds the .env files for the project
 
 ### chat.connections 
 
@@ -93,8 +93,8 @@ contributor.
 | Server GUI    | 6 days  |    Craig     |
 | Documentation | 1 month |    Craig     |
 | Client        | 2.5 hrs |    Emily     |
-| Client GUI    | 4.5 hrs |    Emily     |
-| Documentation | 1 hr    |    Emily     |
+| Client GUI    | 4.5hrs  |    Emily     |
+|Documentation | 1hr     |    Emily     |
 
 ## Protocol
 
@@ -114,9 +114,10 @@ The server monitor app also reads the server logs displaying the last action tha
 Once the server monitor is closed, the server should close as well if it was not closed prior to now, the bash script
 finishes. 
 
-### Client
-It is assumed the user will not be sending very long messages and can cope with sending multiple shorter ones. (see Discussions)
+Client
 
+It is assumed the user will not be sending very long messages and can cope with sending multiple shorter ones. 
+(see Discussions)
 
 ## Discussions
 
@@ -124,12 +125,15 @@ Python's threading library is terrible about closing. This issued arose when try
 script would hang. This was solved by separating the logic of the tkinter window and threading, adding additional exception 
 handling, and lots and lots of head scratching, tears, yelling(cursing), and finally just giving up for a simpler setup.
 
-Because of how the curses library works, the user can only send a message as long as their terminal window. While this is not ideal, this would prevent users from trolling by flooding the entire screen with a very large message, so it has its upsides. There is no reasonable way to fix this, and I am not going through the curses library's code.
+Because of how the curses library works, the user can only send a message as long as their terminal window. While this
+is not ideal, this would prevent users from trolling by flooding the entire screen with a very large message, so it has
+its upsides. There is no reasonable way to fix this, and I am not going through the curses library's code.
 
 ## Status
 
-The server has been completed to the specifications given, and works as required. There are no known bugs, however,
-I was not able to test it for every scenario and condition it may encounter in the wild.
+The server and client has been completed to the specifications given, and works as required. 
+There are no known bugs, however,
+we were not able to test it for every scenario and condition it may encounter in the wild.
 
 
 

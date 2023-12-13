@@ -57,7 +57,7 @@ class Monitor:
         signal.signal(signal.SIGINT, self._close_window)
 
         # Schedule log update every 2 seconds
-        self.root.after(2000, self._update_logs)
+        self.root.after(1000, self._update_logs)
 
     def _update_logs(self):
         """
@@ -65,7 +65,7 @@ class Monitor:
         """
         self._populate_message_log()
         # Reschedule the update after 2 seconds
-        self.root.after(2000, self._update_logs)
+        self.root.after(1000, self._update_logs)
 
     def _populate_message_log(self):
         """
@@ -77,9 +77,9 @@ class Monitor:
             for line in file:
                 message_log += f"{json.loads(line.strip())}\n"
 
-            self.message_log_text.delete(1.0, tk.END)
-            self.message_log_text.insert(tk.END, message_log)
-            self.message_log_text.see(tk.END)
+        self.message_log_text.delete(1.0, tk.END)
+        self.message_log_text.insert(tk.END, message_log)
+        self.message_log_text.see(tk.END)
 
     def _close_window(self, signum=None, frame=None):
         """

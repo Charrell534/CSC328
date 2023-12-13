@@ -3,29 +3,29 @@ import json
 import threading
 from chat.connection.SocketConnection import Connection
 import sys
-import tkinter as tk
-from tkinter import scrolledtext
 import signal
-import os
 import curses
+
 
 class ChatClient(Connection):
     """
     Provides the methods to run a client application using sockets
     """
-    def __int__ (self, shost, sport):
+
+    def __init__(self, shost, sport):
         """
         Initializes the components needed for our client to function
         :param shost: str host name
         :param sport: int host port number
         """
-        super().__int__(shost, sport)
+        super().__init__(shost, sport)
         self.listen_thread = None
         self.username = None
         self.thread_lock = threading.Lock()
         signal.signal(signal.SIGINT, self.close_client)
         self.message_window = None
-        self.exit_flag = False # Flag needs to be set because threads hate me and won't propery close on ctrl + C otherwise.
+        # Flag needs to be set because threads hate me and won't propery close on ctrl + C otherwise.
+        self.exit_flag = False
 
     def connect(self):
         """
@@ -60,16 +60,16 @@ class ChatClient(Connection):
         while True:
             message = input_window.getstr(1, 0).decode('utf-8')
             if message.lower() == "exit":
-                self.send_message(json.dumps({"type":"exit"}))
+                self.send_message(json.dumps({"type": "exit"}))
                 break
-            self.send_message(json.dumps({"type":"message", "message":f"{message}"}))
+            self.send_message(json.dumps({"type": "message", "message": f"{message}"}))
             message = "You: " + message + "\n"
             self.display_message(message)
             input_window.clear()
             input_window.addstr(0, 0, "Enter message or type 'exit' to close chat: ")
             input_window.refresh()
         self.close()
-    
+
     def display_message(self, message):
         """
         Displays messages to the output part of the split screen terminal
@@ -96,13 +96,13 @@ class ChatClient(Connection):
                     break
                 else:
                     print("Username is not unique")
-    
+
     def get_message(self):
         """
         Gets messages sent from the server.
         """
         try:
-            while self.exit_flag == False:
+            while not self.exit_flag:
                 data = json.loads(self.receive_message())
                 if data.get("type") == "message":
                     message = f"{data.get('timestamp')}: {data.get('username')}: {data.get('message')} \n"
@@ -113,7 +113,7 @@ class ChatClient(Connection):
         except KeyboardInterrupt:
             self.close_client()
         except OSError:
-            #Threads do not want to close, this is supposed to catch that
+            # Threads do not want to close, this is supposed to catch that
             return
         except TypeError:
             return
@@ -128,10 +128,12 @@ class ChatClient(Connection):
         curses.endwin()
         self.close()
         exit()
+
+
 if __name__ == "__main__":
     if len(sys.argv) < 3:
         sys.exit("Invalid number of arguments. Format should be: \n./client <host> <port>")
-    
+
     try:
         chat = ChatClient(sys.argv[1], int(sys.argv[2]))
         chat.connect()
@@ -142,6 +144,3 @@ if __name__ == "__main__":
         print("Error: ", e)
     finally:
         exit()
-
-
-

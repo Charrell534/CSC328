@@ -1,11 +1,11 @@
 all: server client
 
-server: server.py
-	chmod +x server.py
+server:
+	chmod +x start.sh
 
-client: client.py
-	cp client.py client
-	chmod +x client
-.PHONY: clean
+client:
+	chmod +x client.py
+
 clean:
-	rm -f client
+	chmod -x start.sh
+	chmod -x client.py
